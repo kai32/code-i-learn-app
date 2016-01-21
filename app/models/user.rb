@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
          
   validates :last_name, presence: true
   
+  has_many :articles
+  
   def full_name
     name = "#{first_name} #{last_name}".strip
     if name.blank?
