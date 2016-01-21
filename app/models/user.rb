@@ -5,4 +5,12 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
          
   validates :last_name, presence: true
+  
+  def full_name
+    name = "#{first_name} #{last_name}".strip
+    if name.blank?
+      name = "Annoymous"
+    end
+    name
+  end
 end
