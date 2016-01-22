@@ -1,16 +1,16 @@
 <%- model_class = Article -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+  <h1><%= @article.title %></h1>
+  <small>
+    Created by: <%= @article.user.full_name if @article.user %>,
+                <%= time_ago_in_words(@article.created_at) %> ago,
+                last updated: <%= time_ago_in_words(@article.updated_at) %> ago
+  </small>
 </div>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:title) %>:</strong></dt>
-  <dd><%= @article.title %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:content) %>:</strong></dt>
-  <dd><%= @article.content %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
-  <dd><%= @article.user_id %></dd>
-</dl>
+<div class="article-content">
+  <%= simple_format(@article.content) %>
+</div>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),
               articles_path, :class => 'btn btn-default'  %>

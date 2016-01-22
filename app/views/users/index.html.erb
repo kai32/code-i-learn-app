@@ -1,0 +1,20 @@
+<h1 align="center">All users</h1>
+<div align="center" class="user-listing row">
+  <% @users.each do |user| %>
+    <ul class="listing col-md-4">
+        <div class="well">
+          <li class="article-title">
+            <%= link_to user.full_name, user_path(user) %>
+          </li>
+          <li><small><%= pluralize(user.articles.count, "article") if user.articles %></small></li>
+          <% if current_user && current_user.is_admin? %>
+            <li><%= link_to "Delete this user", edit_user_registration_path(user), 
+                    method: :delete, 
+                    data: { confirm: "Are you sure you want to delete the user and all their articles?" },
+                    class: "btn btn-xs btn-danger" %></li>
+          <% end %>
+        </div>
+    </ul>
+  
+  <% end %>
+</div>

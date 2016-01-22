@@ -8,6 +8,10 @@ class User < ActiveRecord::Base
   
   has_many :articles
   
+  def is_admin?
+    is_admin
+  end
+  
   def full_name
     name = "#{first_name} #{last_name}".strip
     if name.blank?
