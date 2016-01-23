@@ -1,4 +1,5 @@
 class ArticlesController < ApplicationController
+  skip_before_filter :authenticate_user!, only: [:show, :index]
   before_action :set_article, only: [:show, :edit, :update, :destroy]
 
   # GET /articles
