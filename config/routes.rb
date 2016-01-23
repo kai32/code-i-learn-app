@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
   resources :articles
   root 'home#index'
+  get 'about', to: 'home#about'
   
-  devise_for :users, controllers: { registrations: "registrations" }
+  devise_scope :user do
+       get 'upload_profile_pic', to: 'registrations#upload_avatar'
+       post 'set_avatar', to: 'registrations#set_avatar'
+  end
+  devise_for :users, controllers: { registrations: "registrations" } 
   resources :users, only: [:show, :index]
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

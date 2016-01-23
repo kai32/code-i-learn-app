@@ -8,6 +8,11 @@ class User < ActiveRecord::Base
   
   has_many :articles
   
+  mount_uploader :avatar, AvatarUploader
+  validate :avatar_size
+  
+  
+  
   def is_admin?
     is_admin
   end
@@ -18,5 +23,13 @@ class User < ActiveRecord::Base
       name = "Annoymous"
     end
     name
+  end
+  
+  private
+  
+  def avatar_size
+    if avatar.size > 3.megabytes
+      errors.add(:avatar, "should be less than 3mb")
+    end
   end
 end

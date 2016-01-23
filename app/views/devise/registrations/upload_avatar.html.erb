@@ -1,0 +1,21 @@
+<h1>Edit profile picture</h1>
+<%= render 'shared/errors', obj: @user %>
+<div class="center row col-md-12">
+  <%= avatar_for(@user, size: "250x250") %>
+ 
+</div>
+
+
+
+<%= form_for :user, url: {action: :set_avatar },method: :post, html: {id: "avatar_form"} do |f| %>
+<%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %> 
+ <div class="form-group">
+   <div class="form-control col-md-6">
+     <%= f.file_field :avatar, accept: 'image/jpeg, image/gif, image/png' %>
+   </div>
+ </div>
+ <div class="form-group">
+   <%= f.button "Upload", class: 'btn btn-primary' %>
+ </div>
+
+<% end %>

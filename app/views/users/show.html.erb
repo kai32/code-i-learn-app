@@ -1,2 +1,6 @@
+<div class="center">
+  <%= avatar_for @user %>
+</div>
 <h1 align="center">Welcome to <%= @user.full_name %>'s page</h1>
+
 <%= render 'articles/articles', obj: @user.articles %>

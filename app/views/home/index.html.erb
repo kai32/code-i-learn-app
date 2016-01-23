@@ -11,6 +11,12 @@
 <% end %>
 
 <div class="recents row col-md-12">
+  <h2>Featured articles</h2>
+  <hr />
+  <%= render 'articles/articles', obj: @featured_articles %>
+</div>
+
+<div class="recents row col-md-12">
   <h2>Recent articles</h2>
   <hr />
   <%= render 'articles/articles', obj: @recent_articles %>

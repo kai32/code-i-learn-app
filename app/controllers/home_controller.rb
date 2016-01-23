@@ -1,5 +1,10 @@
 class HomeController < ApplicationController
   def index
-    @recent_articles = Article.all.order(:created_at)
+    @featured_articles = Article.where(is_featured: true).order(:created_at)
+    @recent_articles = Article.all.order(:created_at) - @featured_articles
+  end
+  
+  def about
+    
   end
 end

@@ -2,6 +2,7 @@
 <div class="page-header">
   <h1><%= @article.title %></h1>
   <small>
+    <%= avatar_for(@article.user, size: "20x20") %>
     Created by: <%= @article.user.full_name if @article.user %>,
                 <%= time_ago_in_words(@article.created_at) %> ago,
                 last updated: <%= time_ago_in_words(@article.updated_at) %> ago
