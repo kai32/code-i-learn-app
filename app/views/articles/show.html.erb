@@ -1,12 +1,16 @@
 <%- model_class = Article -%>
 <div class="page-header">
-  <h1><%= @article.title %></h1>
+  <h1><%= @article.title %> <%= "<i class='fa fa-star'></i>".html_safe if @article.is_featured? %></h1>
   <small>
     <%= avatar_for(@article.user, size: "20x20") %>
     Created by: <%= @article.user.full_name if @article.user %>,
                 <%= time_ago_in_words(@article.created_at) %> ago,
                 last updated: <%= time_ago_in_words(@article.updated_at) %> ago
   </small>
+  <br />
+  <% if @article.categories.any? %>
+    <p class="padding-left-25"><small>Categories: <%= render @article.categories %> &nbsp;</small></p>
+  <% end %>
 </div>
 
 <div class="article-content">

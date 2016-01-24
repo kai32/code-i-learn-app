@@ -1,11 +1,11 @@
 class ArticlesController < ApplicationController
   skip_before_filter :authenticate_user!, only: [:show, :index]
-  before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :set_article, only: [:show, :edit, :update, :destroy, :toggle_feature]
 
   # GET /articles
   # GET /articles.json
   def index
-    @articles = Article.all
+    @articles = Article.all.order( created_at: :desc)
   end
 
   # GET /articles/1
@@ -61,6 +61,23 @@ class ArticlesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def toggle_feature
+    if @article.toggle!(:is_featured)
+      flash[:notice] = "Successfully toggled featured status of this article"
+    else
+      flash[:danger] = "Error toggling featured status of this article"
+    end
+    redirect_to article_path(@article)
+  end
+  
+  def featured
+    @articles = Article.where( is_featured: true).order(created_at: :desc)
+  end
+  
+  def recents
+    @articles = Article.all.order(created_at: :desc)
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -70,6 +87,6 @@ class ArticlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.require(:article).permit(:title, :content, :user_id)
+      params.require(:article).permit(:title, :content, :user_id, category_ids: [])
     end
 end

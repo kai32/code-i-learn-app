@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
          
   validates :last_name, presence: true
   
-  has_many :articles
+  has_many :articles, dependent: :destroy
   
   mount_uploader :avatar, AvatarUploader
   validate :avatar_size

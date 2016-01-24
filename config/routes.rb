@@ -1,5 +1,15 @@
 Rails.application.routes.draw do
-  resources :articles
+  resources :categories do
+    get 'recents'
+    get 'featured'
+  end
+  resources :articles do
+    collection do
+      get 'featured'
+      get 'recents', as: :recent
+      patch 'toggle_feature'
+    end
+  end
   root 'home#index'
   get 'about', to: 'home#about'
   

@@ -1,0 +1,25 @@
+<%- model_class = Category -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+
+<div class="row">
+  <% @categories.each do |category| %>
+    <ul class="listing">
+      <div class="col-md-4">
+        <div class="well">
+          <li class="article-title">
+            <%= link_to "#{category.title}", category_path(category) %>
+          </li>
+          <li><small><%= pluralize(category.articles.count, "article") %></small></li>
+        </div>
+      </div>
+    </ul>
+  <% end %>
+</div>
+
+<% if current_user.is_admin? %>
+  <%= link_to t('.new', :default => t("helpers.links.new")),
+              new_category_path,
+              :class => 'btn btn-primary' %>
+<% end %>

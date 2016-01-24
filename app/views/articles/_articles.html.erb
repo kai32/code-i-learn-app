@@ -14,9 +14,14 @@
                 <%= time_ago_in_words(article.created_at) %> ago,
                 last updated: <%= time_ago_in_words(article.updated_at) %> ago
             </small>
+            <% if article.categories.any? %>
+              <p>Categories: <%= render article.categories %> &nbsp;</p>
+            <% end %>
           </div>
           
+          
         </div>
+        
         
         <% if current_user && (current_user == article.user || current_user.is_admin?) %>
           <div class="article-actions">
@@ -25,7 +30,8 @@
                                           data: { confirm: "Are you sure you want to delete the article?" }, 
                                           class: "btn btn-xs btn-danger" %>
             <% if current_user.is_admin? %>
-              <%= link_to "#{article.is_featured? ? "Remove feature" : "Feature"}", "#", class: "btn btn-xs btn-primary" %>
+              <%= link_to "#{article.is_featured? ? "Remove feature" : "Feature"}", toggle_feature_articles_path(id: article.id),
+                  method: :patch, class: "btn btn-xs btn-primary" %>
             <% end %>
       
           </div>
