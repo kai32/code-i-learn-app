@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
   validate :avatar_size
   
+  ratyrate_rater
   
   
   def is_admin?

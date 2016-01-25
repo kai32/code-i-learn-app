@@ -33,9 +33,17 @@
 <div class="article-content">
   <%= simple_format(@article.content) %>
 </div>
-
+<div class="col-md-3 pull-right">
+  <% if current_user %>
+  Rating: <%= rating_for @article, "quality" %>
+  <% else %>
+    Rating: <%= rating_for @article, "quality", disabled: true%>
+  <% end %>
+</div>
 <h3>Comments</h3>
 <hr />
-<%= render 'comments/form', article_id: @article.id %>
+<% if current_user %>
+  <%= render 'comments/form', article_id: @article.id %>
+<% end %>
 <%= render 'comments/comments', obj: @article.comments.order( created_at: :desc) %>
 

@@ -5,6 +5,7 @@ class Article < ActiveRecord::Base
   has_many :article_categories, dependent: :destroy
   has_many :categories, through: :article_categories
   has_many :comments, dependent: :destroy
+  ratyrate_rateable 'quality'
   
   def is_featured?
     is_featured
