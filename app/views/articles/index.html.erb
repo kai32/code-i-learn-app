@@ -3,6 +3,12 @@
 </div>
 <%= render 'articles', obj: @articles %>
 
+<div class="row">
+  <div class="pull-right">
+    <%= will_paginate %>
+  </div>
+</div>
+
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_article_path,
             :class => 'btn btn-primary' %>

@@ -45,5 +45,16 @@
 <% if current_user %>
   <%= render 'comments/form', article_id: @article.id %>
 <% end %>
-<%= render 'comments/comments', obj: @article.comments.order( created_at: :desc) %>
+
+<%= render 'comments/comments', obj: @comments %>
+
+
+<div class="row">
+  <div class="col-lg-10">
+    <div class="pull-right" id="paginate_comments">
+      <%= will_paginate @comments %>
+    </div>
+    
+  </div>
+</div>
 

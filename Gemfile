@@ -7,6 +7,8 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'fog'
 gem 'ratyrate'
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'

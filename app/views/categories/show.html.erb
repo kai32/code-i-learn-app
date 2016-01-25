@@ -4,14 +4,14 @@
 </div>
 
 <div class="recents row col-md-12">
-  <h2><%= link_to "Featured articles on #{@category.title}", featured_articles_path %></h2>
+  <h2><%= link_to "Featured articles on #{@category.title}", category_featured_path(category_id: @category.id) %></h2>
   <hr />
   <%= render 'articles/articles', obj: @featured_articles %>
   <%= link_to 'Read more', category_featured_path(category_id: @category.id), class: 'btn btn-primary btn-xs pull-right' %>
 </div>
 
 <div class="recents row col-md-12">
-  <h2><%= link_to "Recent articles for #{@category.title}", recent_articles_path %></h2>
+  <h2><%= link_to "Recent articles for #{@category.title}", category_recents_path(category_id: @category.id) %></h2>
   <hr />
   <%= render 'articles/articles', obj: @recent_articles %>
   <%= link_to 'Read more', category_recents_path(category_id: @category.id), class: 'btn btn-primary btn-xs pull-right' %>

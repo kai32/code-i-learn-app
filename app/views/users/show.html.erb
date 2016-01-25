@@ -3,4 +3,10 @@
 </div>
 <h1 align="center">Welcome to <%= @user.full_name %>'s page</h1>
 
-<%= render 'articles/articles', obj: @user.articles %>
+<%= render 'articles/articles', obj: @articles %>
+
+<div class="row">
+  <div class="pull-right">
+    <%= will_paginate @articles %>
+  </div>
+</div>

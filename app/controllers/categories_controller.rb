@@ -5,7 +5,7 @@ class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.all
+    @categories = Category.all.paginate(page: params[:page], per_page: 9)
   end
 
   # GET /categories/1
@@ -56,12 +56,12 @@ class CategoriesController < ApplicationController
   
   def featured
     @category = Category.find(params[:category_id])
-    @articles = @category.articles.where( is_featured: true)
+    @articles = @category.articles.where( is_featured: true).paginate(page: params[:page], per_page: 5)
   end
   
   def recents
     @category = Category.find(params[:category_id])
-    @articles = @category.articles
+    @articles = @category.articles.paginate(page: params[:page], per_page: 5)
   end
 
   # DELETE /categories/1

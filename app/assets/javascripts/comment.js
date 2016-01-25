@@ -3,6 +3,7 @@ var init_comment_posting = function(){
   $('#comment_form').on('ajax:success', function(event, data, status){
     console.log("success");
     $('#comments_container').prepend(data);
+    $('#comments_container').find($('div .well')).last().remove();
     $('#comment_form').find('textarea').val('');
     $('#comment_form').find("input[type=submit]").prop("disabled", false);
   });

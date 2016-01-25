@@ -5,13 +5,18 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    @articles = Article.all.order( created_at: :desc)
+    @articles = Article.all.order( created_at: :desc).paginate(page: params[:page], per_page: 5)
   end
 
   # GET /articles/1
   # GET /articles/1.json
   def show
     @comment = Comment.new
+    @comments = @article.comments.paginate(page: params[:page], per_page: 5).order(created_at: :desc)
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /articles/new
@@ -73,11 +78,11 @@ class ArticlesController < ApplicationController
   end
   
   def featured
-    @articles = Article.where( is_featured: true).order(created_at: :desc)
+    @articles = Article.where( is_featured: true).order(created_at: :desc).paginate(page: params[:page], per_page: 5)
   end
   
   def recents
-    @articles = Article.all.order(created_at: :desc)
+    @articles = Article.all.paginate(page: params[:page], per_page: 5).order(created_at: :desc)
   end
 
   private
