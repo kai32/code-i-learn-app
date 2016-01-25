@@ -11,7 +11,7 @@ class CategoriesController < ApplicationController
   # GET /categories/1
   # GET /categories/1.json
   def show
-    @featured_articles = @category.articles.where(is_featured: true)
+    @featured_articles = @category.articles.where(is_featured: true).order( created_at: :desc)
     @recent_articles = @category.articles.order(created_at: :desc) - @featured_articles
   end
 
@@ -56,12 +56,12 @@ class CategoriesController < ApplicationController
   
   def featured
     @category = Category.find(params[:category_id])
-    @articles = @category.articles.where( is_featured: true).paginate(page: params[:page], per_page: 5)
+    @articles = @category.articles.where( is_featured: true).order( created_at: :desc).paginate(page: params[:page], per_page: 5)
   end
   
   def recents
     @category = Category.find(params[:category_id])
-    @articles = @category.articles.paginate(page: params[:page], per_page: 5)
+    @articles = @category.articles.order( created_at: :desc).paginate(page: params[:page], per_page: 5)
   end
 
   # DELETE /categories/1
