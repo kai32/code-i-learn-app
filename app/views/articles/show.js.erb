@@ -1,3 +1,4 @@
 $('#comments_container').replaceWith("<%= j render 'comments/comments', obj: @comments %>");
 $('.pagination').replaceWith("<%= j will_paginate @comments %>");
 $('#paginate_comments').trigger('updated');
+init_reply_listener();

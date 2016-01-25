@@ -12,7 +12,7 @@ class ArticlesController < ApplicationController
   # GET /articles/1.json
   def show
     @comment = Comment.new
-    @comments = @article.comments.paginate(page: params[:page], per_page: 5).order(created_at: :desc)
+    @comments = @article.comments.where(parent_id: nil).paginate(page: params[:page], per_page: 5).order(created_at: :desc)
     respond_to do |format|
       format.html
       format.js

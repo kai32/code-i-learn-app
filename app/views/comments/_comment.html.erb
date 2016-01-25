@@ -5,4 +5,12 @@
   </div>
   <hr />
   <p class="comment-body"><%= comment.content %></p>
+  <div class="comment-replies">
+    <%= render comment.replies if comment.replies.any? %>
+  </div>
+  
+  <div class="row" id="reply-form-container">
+    <small><a href="#" class="pull-right reply", data-parent-id="<%= comment.id %>">Reply</a></small>
+  </div>
+  
 </div>

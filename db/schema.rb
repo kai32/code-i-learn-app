@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160125143024) do
+ActiveRecord::Schema.define(version: 20160125151139) do
 
   create_table "article_categories", force: :cascade do |t|
     t.integer "article_id"
@@ -65,9 +65,11 @@ ActiveRecord::Schema.define(version: 20160125143024) do
     t.integer  "article_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "parent_id"
   end
 
   add_index "comments", ["article_id"], name: "index_comments_on_article_id"
+  add_index "comments", ["parent_id"], name: "index_comments_on_parent_id"
   add_index "comments", ["user_id"], name: "index_comments_on_user_id"
 
   create_table "overall_averages", force: :cascade do |t|
