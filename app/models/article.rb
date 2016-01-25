@@ -6,6 +6,7 @@ class Article < ActiveRecord::Base
   has_many :article_categories, dependent: :destroy
   has_many :categories, through: :article_categories
   has_many :comments, dependent: :destroy
+  validates :description, presence: true, length: {maximum: 140}
   ratyrate_rateable 'quality'
   
   def is_featured?
