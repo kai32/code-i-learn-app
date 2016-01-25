@@ -1,0 +1,8 @@
+<div class="well">
+  <small><%= avatar_for comment.user, size: "20x20" %> <%= link_to comment.user.full_name, user_path(comment.user) %></small>
+  <div class="pull-right">
+    <small><%= time_ago_in_words(comment.created_at) %> ago</small>
+  </div>
+  <hr />
+  <p class="comment-body"><%= comment.content %></p>
+</div>

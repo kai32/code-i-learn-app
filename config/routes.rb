@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     get 'featured'
   end
   resources :articles do
+      post 'comment', to: 'comments#create'
     collection do
       get 'featured'
       get 'recents', as: :recent

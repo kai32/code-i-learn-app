@@ -5,6 +5,11 @@
  padding: 0px; 
 }
 
+.no-side-padding{
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
 .left-padding{
   padding-left: 15px;
 }
@@ -77,4 +82,8 @@
 
 .padding-left-25{
   padding-left:25px;
+}
+
+.comment-body{
+  font-size: 1.1em;
 }

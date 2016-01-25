@@ -1,28 +1,41 @@
 <%- model_class = Article -%>
 <div class="page-header">
   <h1><%= @article.title %> <%= "<i class='fa fa-star'></i>".html_safe if @article.is_featured? %></h1>
-  <small>
-    <%= avatar_for(@article.user, size: "20x20") %>
-    Created by: <%= @article.user.full_name if @article.user %>,
-                <%= time_ago_in_words(@article.created_at) %> ago,
-                last updated: <%= time_ago_in_words(@article.updated_at) %> ago
-  </small>
-  <br />
-  <% if @article.categories.any? %>
-    <p class="padding-left-25"><small>Categories: <%= render @article.categories %> &nbsp;</small></p>
-  <% end %>
+  <div class="row">
+    <div class="col-md-8">
+      <small>
+        <%= avatar_for(@article.user, size: "20x20") %>
+        Created by: <%= @article.user.full_name if @article.user %>,
+                    <%= time_ago_in_words(@article.created_at) %> ago,
+                    last updated: <%= time_ago_in_words(@article.updated_at) %> ago
+      </small>
+      <br />
+      <% if @article.categories.any? %>
+        <p class="padding-left-25"><small>Categories: <%= render @article.categories %> &nbsp;</small></p>
+      <% end %>
+    </div>
+    <div class="col-md-4 pull-right" align="right">
+      <%= link_to t('.back', :default => t("helpers.links.back")),
+                articles_path, :class => 'btn btn-xs btn-default'  %>
+      <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                    edit_article_path(@article), :class => 'btn btn-xs btn-default' %>
+      <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                    article_path(@article),
+                    :method => 'delete',
+                    :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                    :class => 'btn btn-xs btn-danger' %>
+  
+    </div>
+  </div>
+  
 </div>
 
 <div class="article-content">
   <%= simple_format(@article.content) %>
 </div>
 
-<%= link_to t('.back', :default => t("helpers.links.back")),
-              articles_path, :class => 'btn btn-default'  %>
-<%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_article_path(@article), :class => 'btn btn-default' %>
-<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              article_path(@article),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
+<h3>Comments</h3>
+<hr />
+<%= render 'comments/form', article_id: @article.id %>
+<%= render 'comments/comments', obj: @article.comments.order( created_at: :desc) %>
+

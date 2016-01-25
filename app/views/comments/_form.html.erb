@@ -1,0 +1,32 @@
+<%= form_for @comment, url: article_comment_path(article_id: article_id), method: :post, 
+              remote: true ,:html => { id: "comment_form", :class => "form-horizontal category" } do |f| %>
+  <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %> 
+  <% if @comment.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @comment.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+  <span><small>Post comment as <%= current_user.full_name %></small></span>
+  <div class="form-group">
+    <div class="col-lg-10">
+      <%= f.text_area :content, height: 3,:class => 'form-control' %>
+    </div>
+  </div>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+
+  <div class="form-group">
+    <div class="col-lg-10" align="right">
+      <%= f.submit 'Post comment', :class => 'btn btn-primary' %>
+    </div>
+  </div>
+
+<% end %>

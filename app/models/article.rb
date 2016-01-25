@@ -4,6 +4,7 @@ class Article < ActiveRecord::Base
   validates :content, presence: true, length: {minimum: 10}
   has_many :article_categories, dependent: :destroy
   has_many :categories, through: :article_categories
+  has_many :comments, dependent: :destroy
   
   def is_featured?
     is_featured
