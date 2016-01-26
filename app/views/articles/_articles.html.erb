@@ -4,7 +4,10 @@
       <div class="well well-lg">
         
         <div class="article-title">
-          <%= link_to ("#{article.title} #{"<i class='fa fa-star'></i>" if article.is_featured? }".html_safe), article_path(article) %>
+          <%= link_to ("#{article.title} "), article_path(article) %> 
+          <small>
+            <%= "<span class='label label-md label-info'><i class='fa fa-star'></i>Featured</span>".html_safe if article.is_featured? %>
+          </small>
         </div>
         
         <div class="article-body">

@@ -1,3 +1,8 @@
+@import "twitter/bootstrap/bootstrap";
+
+h1{
+  color: @brand-primary;
+}
 
 .center{
   text-align:center;
@@ -15,8 +20,16 @@
   padding-left: 15px;
 }
 
+
 .fa-star{
-  color: blue;
+    color: #fff;
+  }
+
+.navbar-brand{
+  color: @brand-primary !important;
+  .fa{
+    color: @brand-success
+  }
 }
 
 .navbar-right li{
@@ -28,10 +41,23 @@
     padding-bottom: 5px;
     padding-right: 15px;
   }
-  .btn-default:hover{
-
+  .btn:hover{
+    color: #000 !important;
+  }
+  a{
+    padding: 0px;
   }
 }
+
+a.btn, a:visited.btn{
+  color: #fff ;
+}
+
+a.btn-default, a:visited.btn-default{
+  color: @btn-default-color ;
+}
+
+
 
 .description{
   margin-top: 0px;
@@ -45,19 +71,19 @@
 }
 
 .article-meta-details{
-  border-top: 1px solid #eaeaea;
+  border-top: 1px solid @gray-lighter;
   margin-top: 15px; 
   font-size: 0.9em;
 }
 
 .article-body{
-  border-top: 1px solid #eaeaea;
+  border-top: 1px solid @gray-light;
   padding-top: 15px;
   padding-bottom: 15px;
 }
 
 .article-actions{
-  border-top: 1px solid #eaeaea;
+  border-top: 1px solid @gray-lighter;
   padding-top: 5px;
 }
 
@@ -97,4 +123,24 @@
 
 .comment-body{
   font-size: 1.1em;
+}
+
+.well{
+  background-color: #fff !important;
+  border: 0px !important;
+  box-shadow: 1px 0px 10px 0.5px lighten(@gray-light, 10%);
+}
+
+.well.reply{
+  box-shadow: none;
+  border-top: @gray;
+  margin-right: -19px;
+}
+
+a.reply{
+  color: @brand-primary;
+}
+
+a.hide-reply{
+  color: @brand-warning;
 }

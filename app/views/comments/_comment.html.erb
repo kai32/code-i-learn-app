@@ -1,4 +1,4 @@
-<div class="well">
+<div class="well <%= 'reply' if comment.parent_id %>">
   <small><%= avatar_for comment.user, size: "20x20" %> <%= link_to comment.user.full_name, user_path(comment.user) %></small>
   <div class="pull-right">
     <small><%= time_ago_in_words(comment.created_at) %> ago</small>

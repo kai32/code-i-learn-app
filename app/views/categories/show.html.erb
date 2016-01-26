@@ -19,7 +19,7 @@
 
 <%= link_to t('.back', :default => t("helpers.links.back")),
               categories_path, :class => 'btn btn-default'  %>
-<% if current_user.is_admin? %>
+<% if is_admin? %>
   <%= link_to t('.edit', :default => t("helpers.links.edit")),
                 edit_category_path(@category), :class => 'btn btn-default' %>
   <%= link_to t('.destroy', :default => t("helpers.links.destroy")),

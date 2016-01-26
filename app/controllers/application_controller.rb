@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   
   private
   def authenticate_admin
-    flash[:danger] = "Action can only be performed by admins" unless current_user.is_admin?
-    redirect_to root_path unless current_user.is_admin?
+    flash[:danger] = "Action can only be performed by admins" unless (current_user && current_user.is_admin?)
+    redirect_to root_path unless (current_user && current_user.is_admin?)
   end
 end
