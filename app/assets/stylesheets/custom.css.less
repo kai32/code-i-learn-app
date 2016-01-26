@@ -16,8 +16,21 @@ h1{
   padding-right: 0px;
 }
 
+.no-top-padding{
+  padding-top: 0px;
+}
+
+.no-bottom-padding{
+  padding-bottom: 0px;
+}
+
 .left-padding{
   padding-left: 15px;
+}
+
+.side-padding{
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 
@@ -127,14 +140,15 @@ a.btn-default, a:visited.btn-default{
 
 .well{
   background-color: #fff !important;
-  border: 0px !important;
+  border: 0px;
   box-shadow: 1px 0px 10px 0.5px lighten(@gray-light, 10%);
 }
 
 .well.reply{
   box-shadow: none;
-  border-top: @gray;
+  border-top: 1px solid @gray-lighter;
   margin-right: -19px;
+  border-radius: 0px;
 }
 
 a.reply{
@@ -143,4 +157,23 @@ a.reply{
 
 a.hide-reply{
   color: @brand-warning;
+}
+
+.float-left{
+  float:left;
+}
+
+.float-right{
+  float:right;
+}
+.clear-right{
+  clear:right;
+}
+
+.no-margin{
+  margin: 0px;
+}
+
+.width-90{
+  width:90%;
 }

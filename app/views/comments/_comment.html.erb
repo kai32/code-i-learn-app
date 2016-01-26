@@ -1,16 +1,31 @@
-<div class="well <%= 'reply' if comment.parent_id %>">
-  <small><%= avatar_for comment.user, size: "20x20" %> <%= link_to comment.user.full_name, user_path(comment.user) %></small>
-  <div class="pull-right">
-    <small><%= time_ago_in_words(comment.created_at) %> ago</small>
+<div class="well <%= 'no-margin no-bottom-padding reply' if comment.parent_id %>">
+  <div class='row no-margin'>
+    <div class='row no-margin'>
+      <div class="float-left">
+        <%= avatar_for comment.user, size: "50x50" %> 
+      </div>
+      <div class="left-padding float-left clear-right width-90">
+        <small>
+        <%= link_to comment.user.full_name, user_path(comment.user) %>
+          <span class="float-right"><%= time_ago_in_words(comment.created_at) %> ago</span>
+        </small>
+        <p class="comment-body"><%= comment.content %></p>
+      </div>
+      
+    </div>
+    <div class="row no-margin" id="reply-form-container">
+      <small><a href="#" class="pull-right reply", data-parent-id="<%= comment.id %>">Reply</a></small>
+    </div>
   </div>
-  <hr />
-  <p class="comment-body"><%= comment.content %></p>
   <div class="comment-replies">
     <%= render comment.replies if comment.replies.any? %>
   </div>
   
-  <div class="row" id="reply-form-container">
-    <small><a href="#" class="pull-right reply", data-parent-id="<%= comment.id %>">Reply</a></small>
-  </div>
+  
+  
+  
+  
+  
+
   
 </div>
