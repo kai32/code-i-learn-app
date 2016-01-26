@@ -46,10 +46,10 @@
               <li><%= link_to 'Upload profile pic', upload_profile_pic_path %></li>
             </ul>
           </li>
-          <li><%= link_to 'logout', destroy_user_session_path ,method: :delete, class: "btn btn-danger" %></li>
+          <li><%= link_to 'logout', destroy_user_session_path ,method: :delete, class: "btn btn-sm btn-danger" %></li>
         <% else %>
-          <li><%= link_to 'Log in', new_user_session_path ,class: "btn btn-primary" %></li>
-          <li><%= link_to 'Sign up', new_user_registration_path ,class: "btn btn-success" %></li>
+          <li><%= link_to 'Log in', new_user_session_path ,class: "btn btn-sm btn-primary" %></li>
+          <li><%= link_to 'Sign up', new_user_registration_path ,class: "btn btn-sm btn-success" %></li>
         <% end %>
       </ul>
     </div>

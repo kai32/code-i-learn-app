@@ -1,3 +1,4 @@
+
 .center{
   text-align:center;
 }
@@ -20,6 +21,16 @@
 
 .navbar-right li{
   padding: 15px;
+  .btn{
+    color: #fff !important;
+    padding-top: 5px;
+    padding-left: 15px;
+    padding-bottom: 5px;
+    padding-right: 15px;
+  }
+  .btn-default:hover{
+
+  }
 }
 
 .description{
