@@ -20,7 +20,7 @@
 </div>
 <%= will_paginate %>
 
-<% if current_user.is_admin? %>
+<% if is_admin? %>
   <%= link_to t('.new', :default => t("helpers.links.new")),
               new_category_path,
               :class => 'btn btn-primary' %>

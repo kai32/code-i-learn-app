@@ -10,13 +10,13 @@ var init_reply_listener = function(){
       replyForm.attr("id","reply_form");
       //add hidden field here
       replyForm.append($('<input value="' + link.data('parent-id') + '" type="hidden" name="comment[parent_id]" id="comment_parent_id" />'))
-      link.closest('.well').append(replyForm);
+      link.closest('#reply-form-container').append(replyForm);
       init_reply_submit_listener();
     }else{
       link.text('Reply');
       link.addClass('reply');
       link.removeClass('hide-reply');
-      link.closest('.well').find('#reply_form').remove();
+      link.closest('#reply-form-container').find('#reply_form').remove();
     }
     return false;
   });
@@ -30,7 +30,7 @@ var init_reply_submit_listener = function(){
   $('#reply_form').on('ajax:success', function(event, data, status){
     console.log("success");
     var form = $(this);
-    form.parent().find('.comment-replies').append(data);
+    form.closest('.well').find('.comment-replies').append(data);
     init_reply_listener();
     form.remove();
   });
