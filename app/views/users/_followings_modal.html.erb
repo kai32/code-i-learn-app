@@ -10,6 +10,9 @@
       </div>
       <div class="modal-body">
         <% if @followees %>
+          <% if followees.count == 0 %>
+            <p class='lead'>You are not following anyone yet</p>
+          <% end %>
           <% render 'users', obj: @followees %>
         <% else %>
           <p>Loading...</p>
