@@ -17,6 +17,13 @@ class UsersController < ApplicationController
     end
   end
   
+  def followings
+    @followees = User.find(params[:user_id]).followees
+    respond_to do |format|
+      format.js
+    end
+  end
+  
   def follow
     followee = User.find(params[:user_id])
     # debugger

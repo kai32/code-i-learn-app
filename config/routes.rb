@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     post 'follow', to: 'users#follow'
     delete 'unfollow', to: 'users#unfollow'
     get 'followers'
+    get 'followings'
   end
   
   resources :comments, only: [:show]
