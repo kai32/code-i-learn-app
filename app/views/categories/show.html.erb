@@ -1,6 +1,22 @@
 <%- model_class = Category -%>
 <div class="page-header">
-  <h1><%= @category.title %></h1>
+  <h1><%= @category.title %>
+    <div class="pull-right">
+      <% if current_user %>
+        <%= link_to "Follow this category", category_follow_path(@category), 
+                  method: :post,
+                  remote: true,
+                  class: "btn btn-xs btn-primary btn-follow follow 
+                  #{'hide' if current_user.is_following_category?(@category)}" %>
+        <%= link_to "Unfollow this category", category_unfollow_path(@category), 
+                  method: :delete,
+                  remote: true,
+                  class: "btn btn-xs btn-warning btn-follow unfollow
+                  #{'hide' unless current_user.is_following_category?(@category)}" %>
+      <% end %>
+    </div>
+  </h1>
+  
 </div>
 
 <div class="recents row col-md-12">

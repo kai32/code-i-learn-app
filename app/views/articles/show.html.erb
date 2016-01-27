@@ -1,4 +1,5 @@
 <%- model_class = Article -%>
+<% user = @article.user %>
 <div class="page-header">
   <h1>
     <%= @article.title %>
@@ -7,8 +8,8 @@
   <div class="row">
     <div class="col-md-8">
       <small>
-        <%= avatar_for(@article.user, size: "20x20") %>
-        Created by: <%= @article.user.full_name if @article.user %>,
+        <%= avatar_for(user, size: "20x20") %>
+        Created by: <%= link_to(user.full_name, user_path(user)) if user %>,
                     <%= time_ago_in_words(@article.created_at) %> ago,
                     last updated: <%= time_ago_in_words(@article.updated_at) %> ago
       </small>
@@ -16,6 +17,20 @@
       <% if @article.categories.any? %>
         <p class="padding-left-25"><small>Categories: <%= render @article.categories %> &nbsp;</small></p>
       <% end %>
+      <span class="padding-left-25">
+        <% if current_user %>
+            <%= link_to "Follow this user", user_follow_path(user), 
+                      method: :post,
+                      remote: true,
+                      class: "btn btn-xs btn-primary btn-follow follow 
+                      #{'hide' if (current_user.is_following?(user) || user.id == current_user.id)}" %>
+            <%= link_to "Unfollow this user", user_unfollow_path(user), 
+                      method: :delete,
+                      remote: true,
+                      class: "btn btn-xs btn-warning btn-follow unfollow
+                      #{'hide' if ((!current_user.is_following?(user) || user.id == current_user.id))}" %>
+          <% end %>
+      </span>
     </div>
     <div class="col-md-4 pull-right" align="right">
       <%= link_to t('.back', :default => t("helpers.links.back")),

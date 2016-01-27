@@ -1,7 +1,7 @@
 class CategoriesController < ApplicationController
   skip_before_filter :authenticate_user!, only: [:show, :index, :recents, :featured]
   before_action :set_category, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_admin, except: [:show, :index]
+  before_action :authenticate_admin, except: [:show, :index, :follow, :unfollow]
 
   # GET /categories
   # GET /categories.json
@@ -77,6 +77,7 @@ class CategoriesController < ApplicationController
   
   def follow
     user_category = UserCategory.new(user_id: current_user.id, category_id: params[:category_id])
+    debugger
     if user_category.save
       render status: 200, nothing: true
     else

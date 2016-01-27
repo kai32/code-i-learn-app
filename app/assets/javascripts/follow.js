@@ -14,7 +14,7 @@ var init_follow_listener = function(){
   followButton.on('ajax:success', function(event, data, status){
     console.log('success');
     var btn = $(this);
-    btn.closest('ul').find('.btn-follow').toggleClass('hide');
+    btn.closest('div').find('.btn-follow').toggleClass('hide');
     btn.attr('disabled', false);
   });
   
