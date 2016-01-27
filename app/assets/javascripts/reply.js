@@ -52,6 +52,13 @@ var init_reply_submit_listener = function(){
   });
 }
 
+var init_show_reply_listener = function(){
+  $('.show_replies').on('ajax:before', function(event, data, status){
+    $('#comments_modal .modal-body').html('<p>Loading...<p>');
+  });
+};
+
 $(document).ready(function(){
   init_reply_listener();
+  init_show_reply_listener();
 });

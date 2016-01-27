@@ -6,6 +6,6 @@
     
   <% end %>
   <% obj.each do |comment| %>
-    <%= render 'comments/comment', comment: comment %>
+    <%= render 'comments/comment', comment: comment, show_replies: local_assigns[:show_replies] %>
   <% end %>
 </div>

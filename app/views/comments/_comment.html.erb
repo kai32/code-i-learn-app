@@ -17,14 +17,16 @@
       <small><a href="#" class="pull-right reply", data-parent-id="<%= comment.id %>">Reply</a></small>
     </div>
   </div>
+  
   <div class="comment-replies">
-    <%= render comment.replies if comment.replies.any? %>
+    <small><%= link_to 'Show replies', comment_path(comment), 
+                  remote: true, class: 'pull-right show_replies',
+                  data: {toggle: 'modal', target: '#comments_modal'} if comment.replies.any? && !local_assigns[:show_replies]%></small>
+    <% if local_assigns[:show_replies] %>
+    
+      <%= render comment.replies, show_replies: true  if comment.replies.any?%>
+    <% end %>
   </div>
-  
-  
-  
-  
-  
   
 
   
