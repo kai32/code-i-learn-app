@@ -47,7 +47,8 @@ class UsersController < ApplicationController
   
   private 
   def validate_is_user
-    if current_user.id != params[:user_id]
+    if current_user.id.to_s != params[:user_id]
+      debugger
       flash[:danger] = "You can only view who you are following"
       redirect_to root_path
     end
