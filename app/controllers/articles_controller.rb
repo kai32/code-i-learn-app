@@ -84,6 +84,10 @@ class ArticlesController < ApplicationController
   def recents
     @articles = Article.all.paginate(page: params[:page], per_page: 5).order(created_at: :desc)
   end
+  
+  def following
+    
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

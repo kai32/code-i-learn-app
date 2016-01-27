@@ -12,4 +12,20 @@ class Article < ActiveRecord::Base
   def is_featured?
     is_featured
   end
+  
+  def self.followed_by(user)
+    followee_array = []
+    user.followees.each do |followee|
+      followee_array.push(followee.id)
+    end
+    user_categories_array = []
+    user.categories.each do |category|
+      user_categories_array.push(category.id)
+    end
+    Article
+    .joins("LEFT OUTER JOIN article_categories ON articles.id =  article_categories.article_id " + 
+            "LEFT OUTER JOIN categories ON categories.id = article_categories.category_id")
+    .where('categories.id IN (?) or user_id IN (?)', user_categories_array, followee_array) 
+    .order(created_at: :desc)
+  end
 end
