@@ -10,6 +10,15 @@
   </div>
 <% end %>
 
+<% if current_user && @personalized_articles.count > 0 %>
+  <div class="recents row col-md-12">
+    <h2><%= link_to 'Personalized articles', following_articles_path %></h2>
+    <hr />
+    <%= render 'articles/articles', obj: @personalized_articles %>
+    <%= link_to 'Read more', following_articles_path, class: 'btn btn-primary btn-xs pull-right' %>
+  </div>
+<% end %>
+
 <div class="recents row col-md-12">
   <h2><%= link_to 'Featured articles', featured_articles_path %></h2>
   <hr />

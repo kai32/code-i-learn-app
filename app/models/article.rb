@@ -25,7 +25,9 @@ class Article < ActiveRecord::Base
     Article
     .joins("LEFT OUTER JOIN article_categories ON articles.id =  article_categories.article_id " + 
             "LEFT OUTER JOIN categories ON categories.id = article_categories.category_id")
-    .where('categories.id IN (?) or user_id IN (?)', user_categories_array, followee_array) 
+    .where('(categories.id IN (?) or user_id IN (?)) and user_id != ?', 
+            user_categories_array, followee_array, user.id) 
     .order(created_at: :desc)
+    
   end
 end

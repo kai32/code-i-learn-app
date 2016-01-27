@@ -86,7 +86,7 @@ class ArticlesController < ApplicationController
   end
   
   def following
-    
+    @articles = Article.followed_by(current_user).paginate(page: params[:page], per_page: 5)
   end
 
   private

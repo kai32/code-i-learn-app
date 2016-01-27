@@ -9,11 +9,11 @@ Rails.application.routes.draw do
   end
   resources :articles do
       post 'comment', to: 'comments#create'
-      get 'following'
     collection do
       get 'featured'
       get 'recents', as: :recent
       patch 'toggle_feature'
+      get 'following'
     end
   end
   root 'home#index'
