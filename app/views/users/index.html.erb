@@ -15,12 +15,12 @@
                       method: :post,
                       remote: true,
                       class: "btn btn-xs btn-primary btn-follow follow 
-                      #{'hide' if (user.is_following?(user) || user.id == current_user.id)}" %></li>
+                      #{'hide' if (current_user.is_following?(user) || user.id == current_user.id)}" %></li>
             <li><%= link_to "Unfollow this user", user_unfollow_path(user), 
                       method: :delete,
                       remote: true,
                       class: "btn btn-xs btn-warning btn-follow unfollow
-                      #{'hide' if ((!user.is_following?(user) || user.id == current_user.id))}" %></li>
+                      #{'hide' if ((!current_user.is_following?(user) || user.id == current_user.id))}" %></li>
           <% end %>
           <% if !current_user || current_user.id == user.id %>
             <li><span class="btn btn-xs" style="visibility:hidden">smth</span></li>

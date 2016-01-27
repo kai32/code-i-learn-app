@@ -20,7 +20,7 @@ var init_follow_listener = function(){
   
   followButton.on('ajax:error', function(event, xhr, status, error){
     console.log('error');
-    alert('Error following user');
+    alert('An error occured. Request not successful');
     $(this).attr('disabled', false);
   });
 };

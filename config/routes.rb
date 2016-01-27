@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resources :categories do
     get 'recents'
     get 'featured'
+    post 'follow'
+    delete 'unfollow'
   end
   resources :articles do
       post 'comment', to: 'comments#create'

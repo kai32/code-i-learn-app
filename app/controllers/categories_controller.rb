@@ -74,6 +74,29 @@ class CategoriesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def follow
+    user_category = UserCategory.new(user_id: current_user.id, category_id: params[:category_id])
+    if user_category.save
+      render status: 200, nothing: true
+    else
+      render status: 500, nothing: true
+    end
+  end
+  
+  def unfollow
+    user_category = UserCategory.where(user_id: current_user.id, category_id: params[:category_id]).first
+    if user_category
+      if user_category.destroy
+        render status: 200, nothing: true
+      else
+        render status: 500, nothing: true
+      end
+    else
+      render status: 404, nothing: true
+    end
+    
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

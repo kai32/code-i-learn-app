@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   has_many :followees, through: :fellowships, foreign_key: :followee_id
   has_many :inverse_fellowships, dependent: :destroy
   has_many :followers, through: :inverse_fellowships, foreign_key: :follower_id
+  has_many :user_categories, dependent: :destroy
+  has_many :categories, through: :user_categories
   
   mount_uploader :avatar, AvatarUploader
   validate :avatar_size
@@ -33,6 +35,10 @@ class User < ActiveRecord::Base
   
   def is_following?(user)
     followees.where(id: user.id).count > 0
+  end
+  
+  def is_following_category?(category)
+    categories.where(id: category.id).count > 0
   end
   
   

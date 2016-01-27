@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160126102920) do
+ActiveRecord::Schema.define(version: 20160127022410) do
 
   create_table "article_categories", force: :cascade do |t|
     t.integer "article_id"
@@ -126,6 +126,16 @@ ActiveRecord::Schema.define(version: 20160126102920) do
   end
 
   add_index "rating_caches", ["cacheable_id", "cacheable_type"], name: "index_rating_caches_on_cacheable_id_and_cacheable_type"
+
+  create_table "user_categories", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "category_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "user_categories", ["category_id"], name: "index_user_categories_on_category_id"
+  add_index "user_categories", ["user_id"], name: "index_user_categories_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
