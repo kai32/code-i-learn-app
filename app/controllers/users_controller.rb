@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   skip_before_filter :authenticate_user!, except: [:follow]
+  before_action :validate_is_user, only: [:followings]
   
   def index
     @users = User.all.paginate(page: params[:page], per_page: 9)
@@ -41,6 +42,14 @@ class UsersController < ApplicationController
       render status: 200, nothing: true
     else
       render status: 500, nothing: true
+    end
+  end
+  
+  private 
+  def validate_is_user
+    if current_user.id != params[:user_id]
+      flash[:danger] = "You can only view who you are following"
+      redirect_to root_path
     end
   end
   
