@@ -8,6 +8,10 @@ class User < ActiveRecord::Base
   
   has_many :articles, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :fellowships, dependent: :destroy
+  has_many :followees, through: :fellowships, foreign_key: :followee_id
+  has_many :inverse_fellowships, dependent: :destroy
+  has_many :followers, through: :inverse_fellowships, foreign_key: :follower_id
   
   mount_uploader :avatar, AvatarUploader
   validate :avatar_size
@@ -25,6 +29,35 @@ class User < ActiveRecord::Base
       name = "Annoymous"
     end
     name
+  end
+  
+  def is_following?(user)
+    followees.where(id: user.id).count > 0
+  end
+  
+  
+  def follow_user(followee)
+    #current user instance will follow user in the param
+    return false unless followee
+    Fellowship.transaction do
+      InverseFellowship.transaction do
+        fellowship = Fellowship.new(user_id: id, followee_id: followee.id)
+        begin
+          if fellowship.save
+            inverse_fellowship = InverseFellowship.new(user_id: followee.id, follower_id: id, fellowship_id: fellowship.id)
+            if inverse_fellowship.save
+              return true
+            else
+              raise ActiveRecord::Rollback
+            end
+          else
+            raise ActiveRecord::Rollback
+          end
+        rescue
+          return false
+        end
+      end
+    end
   end
   
   private
