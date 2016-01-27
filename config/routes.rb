@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :index] do 
     post 'follow', to: 'users#follow'
     delete 'unfollow', to: 'users#unfollow'
+    get 'followers'
   end
   
   # The priority is based upon order of creation: first created -> highest priority.

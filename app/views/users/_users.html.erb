@@ -1,0 +1,40 @@
+<div align="center" class="user-listing row">
+  <div class="col-xs-12">
+    <% obj.each do |user| %>
+      <ul class="listing col-xs-4">
+          <div class="well">
+            <li><%= avatar_for user, size:"100x100" %></li>
+            <li class="article-title">
+              <%= link_to user.full_name, user_path(user) %>
+            </li>
+            <!-- refactor this part -->
+            <li><small><%= pluralize(user.articles.count, "article") if user.articles %></small></li>
+            <li><small><%= pluralize(user.followers.count, "follower") %></small></li>
+            
+            <% if current_user %>
+              <li><%= link_to "Follow this user", user_follow_path(user), 
+                        method: :post,
+                        remote: true,
+                        class: "btn btn-xs btn-primary btn-follow follow 
+                        #{'hide' if (current_user.is_following?(user) || user.id == current_user.id)}" %></li>
+              <li><%= link_to "Unfollow this user", user_unfollow_path(user), 
+                        method: :delete,
+                        remote: true,
+                        class: "btn btn-xs btn-warning btn-follow unfollow
+                        #{'hide' if ((!current_user.is_following?(user) || user.id == current_user.id))}" %></li>
+            <% end %>
+            <% if !current_user || current_user.id == user.id %>
+              <li><span class="btn btn-xs" style="visibility:hidden">smth</span></li>
+            <% end %>
+            <% if current_user && current_user.is_admin? %>
+              <li><%= link_to "Delete this user", edit_user_registration_path(user), 
+                      method: :delete, 
+                      data: { confirm: "Are you sure you want to delete the user and all their articles?" },
+                      class: "btn btn-xs btn-danger" %></li>
+            <% end %>
+          </div>
+      </ul>
+    
+    <% end %>
+  </div>
+</div>

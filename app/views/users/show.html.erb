@@ -3,6 +3,7 @@
 </div>
 <h1 align="center">Welcome to <%= @user.full_name %>'s page</h1>
 <div align="center" class="padding-all">
+  <small><%= link_to pluralize(@user.followers.count, "follower"), user_followers_path(@user), remote: true ,data: {toggle: "modal", target: '#followers_modal'} %></small><br />
   <% if current_user %>
     <%= link_to "Follow this user", user_follow_path(@user), 
               method: :post,
@@ -24,3 +25,5 @@
     <%= will_paginate @articles %>
   </div>
 </div>
+
+<%= render 'followers_modal' %>

@@ -10,6 +10,13 @@ class UsersController < ApplicationController
     @articles = @user.articles.paginate(page: params[:page], per_page: 5)
   end
   
+  def followers
+    @followers = User.find(params[:user_id]).followers
+    respond_to do |format|
+      format.js
+    end
+  end
+  
   def follow
     followee = User.find(params[:user_id])
     # debugger
