@@ -13,9 +13,11 @@
       </div>
       
     </div>
-    <div class="row no-margin" id="reply-form-container">
-      <small><a href="#" class="pull-right reply", data-parent-id="<%= comment.id %>">Reply</a></small>
-    </div>
+    <% if current_user %>
+      <div class="row no-margin" id="reply-form-container">
+        <small><a href="#" class="pull-right reply", data-parent-id="<%= comment.id %>">Reply</a></small>
+      </div>
+    <% end %>
   </div>
   
   <div class="comment-replies">

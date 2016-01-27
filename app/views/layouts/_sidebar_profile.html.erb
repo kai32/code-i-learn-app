@@ -1,0 +1,29 @@
+<div class="well sidebar-nav">
+  <ul class="nav nav-list">
+    <li>
+      <div class="center">
+        <ul class="listing">
+          <li><%= link_to (avatar_for user, size: "120x120"), upload_profile_pic_path %></li>
+          <li><h3><%= link_to user.full_name, user_path(user) %></h3></li>
+          <li>
+            <%= link_to "Follow this user", user_follow_path(user), 
+                      method: :post,
+                      remote: true,
+                      class: "btn btn-xs btn-primary btn-follow follow 
+                      #{'hide' if (current_user.is_following?(user) || user.id == current_user.id)}" %>
+            <%= link_to "Unfollow this user", user_unfollow_path(user), 
+                      method: :delete,
+                      remote: true,
+                      class: "btn btn-xs btn-warning btn-follow unfollow
+                      #{'hide' if ((!current_user.is_following?(user) || user.id == current_user.id))}" %>
+          </li>
+        </ul>
+      </div>
+    </li>
+    <li><%= link_to pluralize(user.articles.count, 'article'), user_path(user) %></li>
+    <li><%= link_to pluralize(user.followers.count, "follower"), user_followers_path(user), remote: true ,data: {toggle: "modal", target: '#followers_modal'} %></li>
+    <li><%= link_to pluralize(user.followees.count, 'following'), '#' %></li>
+  </ul>
+</div>
+
+<%= render 'users/followers_modal' %>

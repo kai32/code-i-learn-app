@@ -11,9 +11,8 @@ Rails.application.routes.draw do
       post 'comment', to: 'comments#create'
     collection do
       get 'featured'
-      get 'recents', as: :recent
+      # get 'recents', as: :recent
       patch 'toggle_feature'
-      get 'following'
     end
   end
   root 'home#index'

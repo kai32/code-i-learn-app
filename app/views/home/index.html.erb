@@ -1,4 +1,11 @@
 <% if current_user %>
+  <% content_for :sidebar do %>
+    <%= render 'layouts/sidebar_profile', user: current_user%>
+    <%= render 'articles/sidebar_articles' %>
+  <% end %>
+<% end %>
+
+<% if current_user %>
   <h1>Welcome back, <%= current_user.full_name %>!</h1>
 <% else %>
   <div class="jumbotron">
@@ -12,23 +19,28 @@
 
 <% if current_user && @personalized_articles.count > 0 %>
   <div class="recents row col-md-12">
-    <h2><%= link_to 'Personalized articles', following_articles_path %></h2>
+    <h2>Personalized articles</h2>
     <hr />
     <%= render 'articles/articles', obj: @personalized_articles %>
-    <%= link_to 'Read more', following_articles_path, class: 'btn btn-primary btn-xs pull-right' %>
+  </div>
+  <div class="row">
+    <div class="pull-right">
+      <%= will_paginate @personalized_articles %>
+    </div>
+  </div>
+<% else %>
+  <div class="recents row col-md-12">
+    <h2><%= link_to 'Featured articles', featured_articles_path %></h2>
+    <hr />
+    <%= render 'articles/articles', obj: @featured_articles %>
+    <%= link_to 'Read more', featured_articles_path, class: 'btn btn-primary btn-xs pull-right' %>
+  </div>
+  
+  <div class="recents row col-md-12">
+    <h2><%= link_to "Recent articles", articles_path %></h2>
+    <hr />
+    <%= render 'articles/articles', obj: @recent_articles %>
+    <%= link_to 'Read more', articles_path, class: 'btn btn-primary btn-xs pull-right' %>
   </div>
 <% end %>
 
-<div class="recents row col-md-12">
-  <h2><%= link_to 'Featured articles', featured_articles_path %></h2>
-  <hr />
-  <%= render 'articles/articles', obj: @featured_articles %>
-  <%= link_to 'Read more', featured_articles_path, class: 'btn btn-primary btn-xs pull-right' %>
-</div>
-
-<div class="recents row col-md-12">
-  <h2><%= link_to "Recent articles", recent_articles_path %></h2>
-  <hr />
-  <%= render 'articles/articles', obj: @recent_articles %>
-  <%= link_to 'Read more', recent_articles_path, class: 'btn btn-primary btn-xs pull-right' %>
-</div>

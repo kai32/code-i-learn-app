@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  skip_before_filter :authenticate_user!, only: [:show]
   
   def show
     @comment = Comment.find(params[:id])

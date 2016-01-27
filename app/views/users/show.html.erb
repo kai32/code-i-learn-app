@@ -1,22 +1,11 @@
+<% content_for :sidebar do %>
+  <%= render 'layouts/sidebar_profile', user: @user %>
+<% end %>
 <div class="center">
-  <%= avatar_for @user %>
+  <%#= avatar_for @user %>
 </div>
 <h1 align="center">Welcome to <%= @user.full_name %>'s page</h1>
-<div align="center" class="padding-all">
-  <small><%= link_to pluralize(@user.followers.count, "follower"), user_followers_path(@user), remote: true ,data: {toggle: "modal", target: '#followers_modal'} %></small><br />
-  <% if current_user %>
-    <%= link_to "Follow this user", user_follow_path(@user), 
-              method: :post,
-              remote: true,
-              class: "btn btn-xs btn-primary btn-follow follow 
-              #{'hide' if (current_user.is_following?(@user) || @user.id == current_user.id)}" %>
-    <%= link_to "Unfollow this user", user_unfollow_path(@user), 
-              method: :delete,
-              remote: true,
-              class: "btn btn-xs btn-warning btn-follow unfollow
-              #{'hide' if ((!current_user.is_following?(@user) || @user.id == current_user.id))}" %>
-  <% end %>
-</div>
+
 
 <%= render 'articles/articles', obj: @articles %>
 
@@ -26,4 +15,4 @@
   </div>
 </div>
 
-<%= render 'followers_modal' %>
+<%#= render 'followers_modal' %>
