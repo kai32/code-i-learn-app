@@ -1,7 +1,8 @@
 <div align="center" class="user-listing row">
-  <div class="col-xs-12">
+  <div class="col-sm-12">
     <% obj.each do |user| %>
-      <ul class="listing col-xs-4">
+      <% next if current_user && user.id == current_user.id unless local_assigns[:show_current_user] %>
+      <ul class="listing col-sm-4">
           <div class="well">
             <li><%= avatar_for user, size:"100x100" %></li>
             <li class="article-title">

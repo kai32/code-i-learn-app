@@ -1,2 +1,2 @@
-$('#followers_modal .modal-body').replaceWith('<%= j render 'users', obj: @followers %>');
+$('#followers_modal .modal-body').replaceWith('<%= j render 'users', obj: @followers, show_current_user: true %>');
 init_follow_listener();

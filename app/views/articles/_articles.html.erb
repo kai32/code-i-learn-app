@@ -8,9 +8,27 @@
           <small>
             <%= "<span class='label label-md label-info'><i class='fa fa-star'></i>Featured</span>".html_safe if article.is_featured? %>
           </small>
+          <% if current_user && (current_user == article.user || current_user.is_admin?) %>
+            <div class="dropdown pull-right">
+              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                <i class="fa fa-bars"></i>
+              </button>
+              <ul class="dropdown-menu">
+                <li><%= link_to "Edit this article", edit_article_path(article)%></li>
+                <li><%= link_to "Delete this article", article_path(article), method: :delete, 
+                                              data: { confirm: "Are you sure you want to delete the article?" }%></li>
+                <% if current_user.is_admin? %>
+                  <li><%= link_to "#{article.is_featured? ? "Remove feature" : "Feature"}", toggle_feature_articles_path(id: article.id),
+                      method: :patch %></li>
+                <% end %>
+              </ul>
+        
+            </div>
+          <% end %>
+          
         </div>
         
-        <div class="article-body">
+        <div class="article-body no-padding">
           <% if article.description %>
             <%= truncate(strip_tags(article.description), length: 100) %>  
           <% else %>
@@ -28,21 +46,6 @@
           
           
         </div>
-        
-        
-        <% if current_user && (current_user == article.user || current_user.is_admin?) %>
-          <div class="article-actions">
-            <%= link_to "Edit this article", edit_article_path(article), class: "btn btn-xs btn-success"%>
-            <%= link_to "Delete this article", article_path(article), method: :delete, 
-                                          data: { confirm: "Are you sure you want to delete the article?" }, 
-                                          class: "btn btn-xs btn-danger" %>
-            <% if current_user.is_admin? %>
-              <%= link_to "#{article.is_featured? ? "Remove feature" : "Feature"}", toggle_feature_articles_path(id: article.id),
-                  method: :patch, class: "btn btn-xs btn-primary" %>
-            <% end %>
-      
-          </div>
-        <% end %>
         
       </div>
     </div>

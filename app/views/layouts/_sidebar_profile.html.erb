@@ -1,4 +1,4 @@
-<div class="well sidebar-nav">
+<div class="well sidebar-nav <%= 'hidden-sm hidden-xs' unless local_assigns[:show_on_mobile] %>">
   <ul class="nav nav-list">
     <li>
       <div class="center">
@@ -22,7 +22,7 @@
     </li>
     <li><%= link_to pluralize(user.articles.count, 'article'), user_path(user) %></li>
     <li><%= link_to pluralize(user.followers.count, "follower"), user_followers_path(user), remote: true ,data: {toggle: "modal", target: '#followers_modal'} %></li>
-    <li><%= link_to pluralize(user.followees.count, 'following'), user_followings_path(user), remote: true ,data: {toggle: "modal", target: '#followings_modal'} %></li>
+    <li><%= link_to pluralize(user.followees.count, 'following'), user.id == current_user.id ? user_followings_path(user) : '#', remote: true ,data: {toggle: "modal", target: '#followings_modal'} %></li>
   </ul>
 </div>
 
