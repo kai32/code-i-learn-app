@@ -30,4 +30,22 @@ class Article < ActiveRecord::Base
     .order(created_at: :desc)
     
   end
+  
+  def related_articles(limit = nil)
+    categories_id_text = "("
+    size = categories.size
+    categories.each_with_index do |category, i|
+      categories_id_text += "#{category.id.to_s}"
+      if i < size - 1
+        categories_id_text += ", "
+      end
+    end
+    categories_id_text += ")"
+    Article.find_by_sql("select id, title, is_featured FROM" +
+    " (articles LEFT JOIN (select article_id, COUNT(article_id) AS number_of_matches" +
+    " FROM article_categories where category_id IN #{categories_id_text} " + 
+    " GROUP BY article_id) ON articles.id = article_id ) " +
+    " ORDER BY number_of_matches desc, is_featured desc" +
+    ( limit ? " LIMIT #{limit + 1}" : "")) - [self] # limit + 1 cus deducting self
+  end
 end

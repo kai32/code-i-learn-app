@@ -1,5 +1,6 @@
 <% content_for :sidebar do %>
   <%= render 'layouts/sidebar_profile', user: @article.user, show_on_mobile: true %>
+  <%= render 'sidebar_articles', related_articles: @article.related_articles(3) %>
 <% end %>
 <%- model_class = Article -%>
 <% user = @article.user %>
