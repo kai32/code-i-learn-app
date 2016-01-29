@@ -10,6 +10,7 @@
     <%= stylesheet_link_tag "application", :media => "all" %>
     <%= javascript_include_tag 'https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js'%>
     <%= javascript_include_tag 'https://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js'%>
+    <%= analytics_init if GoogleAnalytics.valid_tracker? %>
 
     <!-- For third-generation iPad with high-resolution Retina display: -->
     <!-- Size should be 144 x 144 pixels -->

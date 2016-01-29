@@ -10,6 +10,7 @@ gem 'ratyrate'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'bootsy', :path => "~/rails_projects/bootsy"
+gem 'google-analytics-rails'
 
 gem 'less-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
