@@ -1,5 +1,6 @@
-PATH
-  remote: bootsy
+GIT
+  remote: git://github.com/kai32/bootsy.git
+  revision: 2dae2463a24d316a7e37c044a9c47df3662dcb64
   specs:
     bootsy (2.2.1)
       carrierwave (~> 0.10)
