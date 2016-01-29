@@ -8,21 +8,25 @@
             <li class="article-title">
               <%= link_to user.full_name, user_path(user) %>
             </li>
-            <!-- refactor this part -->
             <li><small><%= pluralize(user.articles.count, "article") if user.articles %></small></li>
-            <li><small><%= pluralize(user.followers.count, "follower") %></small></li>
+            <li><small><%= link_to pluralize(user.followers.count, "follower"), user_followers_path(user),
+                          remote: true,
+                          data: {toggle: "modal", target: '#followers_modal', count: user.followers.count}, 
+                          id: "followers-#{user.id}" %></small></li>
             
             <% if current_user %>
               <li><%= link_to "Follow this user", user_follow_path(user), 
                         method: :post,
                         remote: true,
                         class: "btn btn-xs btn-primary btn-follow follow 
-                        #{'hide' if (current_user.is_following?(user) || user.id == current_user.id)}" %></li>
+                        #{'hide' if (current_user.is_following?(user) || user.id == current_user.id)}",
+                        data: { user_id: user.id}%></li>
               <li><%= link_to "Unfollow this user", user_unfollow_path(user), 
                         method: :delete,
                         remote: true,
                         class: "btn btn-xs btn-warning btn-follow unfollow
-                        #{'hide' if ((!current_user.is_following?(user) || user.id == current_user.id))}" %></li>
+                        #{'hide' if ((!current_user.is_following?(user) || user.id == current_user.id))}",
+                        data: { user_id: user.id}%></li>
             <% end %>
             <% if !current_user || current_user.id == user.id %>
               <li><span class="btn btn-xs" style="visibility:hidden">smth</span></li>
@@ -38,4 +42,5 @@
     
     <% end %>
   </div>
+  <%# no need render modal div cus sidebar got %>
 </div>

@@ -10,19 +10,25 @@
                       method: :post,
                       remote: true,
                       class: "btn btn-xs btn-primary btn-follow follow 
-                      #{'hide' if (current_user.is_following?(user) || user.id == current_user.id)}" %>
+                      #{'hide' if (current_user.is_following?(user) || user.id == current_user.id)}",
+                      data: {user_id: user.id} %>
             <%= link_to "Unfollow this user", user_unfollow_path(user), 
                       method: :delete,
                       remote: true,
                       class: "btn btn-xs btn-warning btn-follow unfollow
-                      #{'hide' if ((!current_user.is_following?(user) || user.id == current_user.id))}" %>
+                      #{'hide' if ((!current_user.is_following?(user) || user.id == current_user.id))}",
+                      data: { user_id: user.id}%>
           </li>
         </ul>
       </div>
     </li>
     <li><%= link_to pluralize(user.articles.count, 'article'), user_path(user) %></li>
-    <li><%= link_to pluralize(user.followers.count, "follower"), user_followers_path(user), remote: true ,data: {toggle: "modal", target: '#followers_modal'} %></li>
-    <li><%= link_to pluralize(user.followees.count, 'following'), user.id == current_user.id ? user_followings_path(user) : '#', remote: true ,data: {toggle: "modal", target: '#followings_modal'} %></li>
+    <li><%= link_to pluralize(user.followers.count, "follower"), user_followers_path(user), remote: true ,
+            data: {toggle: "modal", target: '#followers_modal', count: user.followers.count}, 
+            id: "followers-#{user.id}" %></li>
+    <li><%= link_to pluralize(user.followees.count, 'following'), user.id == current_user.id ? user_followings_path(user) : '#', 
+            remote: true ,data: {toggle: "modal", target: '#followings_modal', count: user.followees.count},
+            id: ('followings-current-user' if user.id==current_user.id) %></li>
   </ul>
 </div>
 
