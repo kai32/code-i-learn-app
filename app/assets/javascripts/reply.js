@@ -1,6 +1,7 @@
 var init_reply_listener = function(){
   $('#reply-form-container a').unbind();
   $('#reply-form-container a').on('click', function(){
+    console.log('on click reply');
     var link = $(this);
     if(link.hasClass('reply')){
       link.text('Hide');

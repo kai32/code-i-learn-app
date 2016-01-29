@@ -3,9 +3,13 @@ var init_comment_posting = function(){
   $('#comment_form').on('ajax:success', function(event, data, status){
     console.log("success");
     $('#comments_container').prepend(data);
-    $('#comments_container').find($('div .well')).last().remove();
+    if($('#comments_container').find($('div .well')).length == 6){
+      $('#comments_container').find($('div .well')).last().remove();
+    }
     $('#comment_form').find('textarea').val('');
     $('#comment_form').find("input[type=submit]").prop("disabled", false);
+    init_reply_listener();
+    init_show_reply_listener();
   });
   
   $('#comment_form').on('ajax:before', function(event, data, status){
