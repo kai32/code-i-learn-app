@@ -1,7 +1,8 @@
 @import "twitter/bootstrap/bootstrap";
+@import "bootwatch.less";
 
 h1{
-  color: @brand-primary;
+  color: @brand-info;
 }
 
 .center{
@@ -47,7 +48,7 @@ h1{
 }
 
 .navbar-brand{
-  color: @brand-primary !important;
+  color: @brand-info !important;
   .fa{
     color: @brand-success
   }
@@ -144,22 +145,23 @@ a.btn-default, a:visited.btn-default{
 .comment-body{
   font-size: 1.1em;
 }
-
+/*
 .well{
   background-color: #fff !important;
   border: 0px;
   box-shadow: 1px 0px 10px 0.5px lighten(@gray-light, 10%);
-}
+}*/
 
 .well.reply{
   box-shadow: none;
+  border: 0px;
   border-top: 1px solid @gray-lighter;
   margin-right: -19px;
   border-radius: 0px;
 }
 
 a.reply{
-  color: @brand-primary;
+  color: @brand-info;
 }
 
 a.hide-reply{
@@ -189,10 +191,12 @@ a.hide-reply{
   background-color: @navbar-default-bg !important;
   
   h3 a{
-    color: @brand-primary !important;
+    color: @brand-info !important;
   }
 }
 
 .btn-default.dropdown-toggle{
   border: none;
 }
+
+

@@ -27,12 +27,12 @@
                       method: :post,
                       remote: true,
                       class: "btn btn-xs btn-primary btn-follow follow 
-                      #{'hide' if (current_user.is_following?(user) || user.id == current_user.id)}" %>
+                      #{'hide' if !current_user or (current_user.is_following?(user) || user.id == current_user.id)}" %>
             <%= link_to "Unfollow this user", user_unfollow_path(user), 
                       method: :delete,
                       remote: true,
                       class: "btn btn-xs btn-warning btn-follow unfollow
-                      #{'hide' if ((!current_user.is_following?(user) || user.id == current_user.id))}" %>
+                      #{'hide' if ((!current_user or !current_user.is_following?(user) || user.id == current_user.id))}" %>
           <% end %>
       </span>
     </div>
