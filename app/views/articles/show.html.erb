@@ -39,13 +39,15 @@
     <div class="col-md-4 pull-right" align="right">
       <%= link_to t('.back', :default => t("helpers.links.back")),
                 articles_path, :class => 'btn btn-xs btn-default'  %>
-      <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                    edit_article_path(@article), :class => 'btn btn-xs btn-default' %>
+      <% if current_user && current_user.id == @article.user.id or is_admin? %>
+        <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_article_path(@article), :class => 'btn btn-xs btn-default'  %>
       <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                     article_path(@article),
                     :method => 'delete',
                     :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                     :class => 'btn btn-xs btn-danger' %>
+      <% end %>
       <% if is_admin? %>
         <%= link_to "#{@article.is_featured? ? "Remove feature" : "Feature"}", toggle_feature_articles_path(id: @article.id),
             method: :patch, class: "btn btn-xs btn-primary" %>
