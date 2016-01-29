@@ -9,7 +9,7 @@ gem 'fog'
 gem 'ratyrate'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
-gem 'bootsy', :path => "~/rails_projects/bootsy"
+gem 'bootsy', :path => "bootsy"
 gem 'google-analytics-rails'
 
 gem 'less-rails'

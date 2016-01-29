@@ -1,5 +1,5 @@
 PATH
-  remote: ~/rails_projects/bootsy
+  remote: bootsy
   specs:
     bootsy (2.2.1)
       carrierwave (~> 0.10)
