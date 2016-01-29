@@ -1,5 +1,5 @@
 <% content_for :sidebar do %>
-  <%= render 'layouts/sidebar_profile', user: @user, show_on_mobile: true %>
+  <%= render 'layouts/sidebar_profile', user: @user, show_on_mobile: true, show_bio: true %>
 <% end %>
 <div class="center">
   <%#= avatar_for @user %>
@@ -8,6 +8,9 @@
 
 
 <%= render 'articles/articles', obj: @articles %>
+<% if @articles == nil || @articles.count == 0 %>
+  <p class="lead">User has no articles</p>
+<% end %>
 
 <div class="row">
   <div class="pull-right">

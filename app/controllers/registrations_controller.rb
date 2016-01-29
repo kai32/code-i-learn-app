@@ -1,6 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
   
-  before_filter :configure_permitted_params, only: [:create]
+  before_filter :configure_permitted_params, only: [:create, :update]
   
   def upload_avatar
     @user = current_user
@@ -27,6 +27,9 @@ class RegistrationsController < Devise::RegistrationsController
   def configure_permitted_params
     devise_parameter_sanitizer.for(:sign_up) << :first_name
     devise_parameter_sanitizer.for(:sign_up) << :last_name
+    devise_parameter_sanitizer.for(:account_update) << :first_name
+    devise_parameter_sanitizer.for(:account_update) << :last_name
+    devise_parameter_sanitizer.for(:account_update) << :bio
   end
   
 end
