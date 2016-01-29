@@ -22,8 +22,8 @@ Rails.application.routes.draw do
        get 'upload_profile_pic', to: 'registrations#upload_avatar'
        post 'set_avatar', to: 'registrations#set_avatar'
   end
-  devise_for :users, controllers: { registrations: "registrations" } 
-  resources :users, only: [:show, :index] do 
+  devise_for :users, controllers: { registrations: "registrations" }
+  resources :users, only: [:show, :index, :destroy] do 
     post 'follow', to: 'users#follow'
     delete 'unfollow', to: 'users#unfollow'
     get 'followers'

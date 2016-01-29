@@ -1,9 +1,10 @@
 class InverseFellowship < ActiveRecord::Base
-  belongs_to :fellowships, dependent: :destroy
+  belongs_to :fellowship, dependent: :delete
   belongs_to :user
   belongs_to :follower, class_name: 'User'
   validate :user_not_following_self
   validate :user_not_already_following
+
   
   private
   def user_not_following_self
@@ -17,4 +18,6 @@ class InverseFellowship < ActiveRecord::Base
       errors.add(:follower, 'User is already following this user')
     end
   end
+  
+
 end

@@ -11,6 +11,17 @@ class UsersController < ApplicationController
     @articles = @user.articles.order(created_at: :desc).paginate(page: params[:page], per_page: 5)
   end
   
+  def destroy
+    @user = User.find(params[:id])
+    if @user.destroy
+      flash[:success] = "Deleted user and all its articles"
+      redirect_to users_path
+    else
+      flash[:danger] = "Error deleting user"
+      redirect_to users_path
+    end
+  end
+  
   def followers
     @followers = User.find(params[:user_id]).followers
     respond_to do |format|
