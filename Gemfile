@@ -11,6 +11,7 @@ gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'bootsy', github: 'kai32/bootsy'
 gem 'google-analytics-rails'
+gem "schema_plus"
 
 gem 'less-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
