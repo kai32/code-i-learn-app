@@ -48,7 +48,7 @@ class Article < ActiveRecord::Base
     Article.find_by_sql("select id, title, is_featured FROM" +
     " (articles LEFT JOIN (select article_id, COUNT(article_id) AS number_of_matches" +
     " FROM article_categories where category_id IN #{categories_id_text} " + 
-    " GROUP BY article_id) ON articles.id = article_id ) " +
+    " GROUP BY article_id) ON articles.id = article_id)  AS subquery " +
     " ORDER BY number_of_matches desc, is_featured desc" +
     ( limit ? " LIMIT #{limit + 1}" : "")) - [self] # limit + 1 cus deducting self
   end
