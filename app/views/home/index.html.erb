@@ -9,10 +9,13 @@
   <h1>Welcome back, <%= current_user.full_name %>!</h1>
 <% else %>
   <div class="jumbotron">
-    <h1>Welcome to Code I Learn</h1>
-    <p class="lead">
-      Learnt a new tip or trick today? Discovered new solutions today? Share it with the world on Code I Learn
-    </p>
+    <div class='jumbotron-content'>
+      <h1>Welcome to Code I Learn</h1>
+      <p class="lead">
+        Learnt a new tip or trick today? Discovered new solutions today? Share it with the world on Code I Learn
+      </p>
+    </div>
+    
     <%= link_to "Sign up", new_user_registration_path, class: "btn btn-lg btn-primary" %>
   </div>
 <% end %>
