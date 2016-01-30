@@ -1,3 +1,5 @@
+<% set_title "Profile of #{@user.full_name}" %>
+<% set_description @user.bio if @user.bio %>
 <% content_for :sidebar do %>
   <%= render 'layouts/sidebar_profile', user: @user, show_on_mobile: true, show_bio: true %>
 <% end %>

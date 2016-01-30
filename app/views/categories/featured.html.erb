@@ -1,3 +1,6 @@
+<% set_title "#{@category.title} | Featured articles" %>
+<% set_description "Featured articles written by users on #{@category.title}" %>
+
 <h1>Featured articles for <%= @category.title %></h1>
 
 <%= render 'articles/articles', obj: @articles %>

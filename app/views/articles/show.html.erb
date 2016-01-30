@@ -2,6 +2,8 @@
   <%= render 'layouts/sidebar_profile', user: @article.user, show_on_mobile: true, show_bio: true %>
   <%= render 'sidebar_articles', related_articles: @article.related_articles(3) %>
 <% end %>
+<% set_title @article.title %>
+<% set_description @article.description %>
 <%- model_class = Article -%>
 <% user = @article.user %>
 <div class="page-header">

@@ -40,4 +40,18 @@ module ApplicationHelper
   def is_admin?
     current_user && current_user.is_admin?
   end
+  
+  def set_title(title)
+    return if title.empty?
+    content_for :title do 
+      "#{title} - Code I Learn"
+    end
+  end
+  
+  def set_description(description)
+    return if description.empty?
+    content_for :description do
+      description
+    end
+  end
 end

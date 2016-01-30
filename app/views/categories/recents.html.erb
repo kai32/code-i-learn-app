@@ -1,3 +1,5 @@
+<% set_title "#{@category.title} | Recent articles" %>
+<% set_description "Recent articles written by users on #{@category.title}" %>
 <h1>Recent articles for <%= @category.title %></h1>
 
 <%= render 'articles/articles', obj: @articles %>

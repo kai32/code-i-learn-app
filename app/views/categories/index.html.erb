@@ -1,3 +1,6 @@
+<% set_title 'All categories' %>
+<% set_description "Read coding related articles for the following #{pluralize(@categories.count, 'category')}" %>
+
 <%- model_class = Category -%>
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
