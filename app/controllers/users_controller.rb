@@ -56,6 +56,31 @@ class UsersController < ApplicationController
     end
   end
   
+  def favourite
+    article = Article.find(params[:article_id])
+    if current_user.favourite_article article
+      render status: 200, nothing: true
+    else
+      render status: 500, nothing: true
+    end
+  end
+  
+  def unfavourite
+    article =Article.find(params[:article_id])
+    if current_user.unfavourite_article article
+      render status: 200, nothing: true
+    else
+      render status: 500, nothing: true
+    end
+  end
+  
+  def favourite_articles
+    @favourite_articles = current_user.favourite_articles
+    respond_to do |format|
+      format.js
+    end
+  end
+  
   private 
   def validate_is_user
     if current_user.id.to_s != params[:user_id]

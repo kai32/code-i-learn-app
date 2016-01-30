@@ -8,6 +8,8 @@ class Article < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   validates :description, presence: true, length: {maximum: 140}
   ratyrate_rateable 'quality'
+  has_many :favourites, dependent: :destroy
+  has_many :fans, source: :user, through: :favourites, foreign_key: :user_id
   
   def is_featured?
     is_featured
@@ -52,4 +54,6 @@ class Article < ActiveRecord::Base
     " ORDER BY number_of_matches desc, is_featured desc" +
     ( limit ? " LIMIT #{limit + 1}" : "")) - [self] # limit + 1 cus deducting self
   end
+  
+  
 end

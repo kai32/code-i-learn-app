@@ -9,10 +9,13 @@ Rails.application.routes.draw do
   end
   resources :articles do
       post 'comment', to: 'comments#create'
+      post 'favourite', to: 'users#favourite'
+      delete 'favourite', to: 'users#unfavourite'
     collection do
       get 'featured'
       # get 'recents', as: :recent
       patch 'toggle_feature'
+      get 'favourites', to: 'users#favourite_articles', as: 'favourite'
     end
   end
   root 'home#index'

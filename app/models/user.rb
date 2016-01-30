@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
   has_many :followers, through: :inverse_fellowships, foreign_key: :follower_id
   has_many :user_categories, dependent: :destroy
   has_many :categories, through: :user_categories
+  has_many :favourites, dependent: :destroy
+  has_many :favourite_articles, through: :favourites, source: :article, foreign_key: :article_id
   
   mount_uploader :avatar, AvatarUploader
   validate :avatar_size
@@ -65,6 +67,20 @@ class User < ActiveRecord::Base
         end
       end
     end
+  end
+  
+  def favourite_article(article)
+    favourite = Favourite.new(user_id: id, article_id: article.id)
+    favourite.save
+  end
+  
+  def unfavourite_article(article)
+    favourite = favourites.where(article_id: article.id).first
+    favourite.destroy
+  end
+  
+  def has_favourite?(article)
+    favourites.where(article_id: article.id).any?
   end
   
   private

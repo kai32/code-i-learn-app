@@ -38,10 +38,15 @@
     <li><%= link_to pluralize(user.followees.count, 'following'), (current_user && user.id == current_user.id) ? user_followings_path(user) : '#', 
             remote: true ,data: {toggle: "modal", target: '#followings_modal', count: user.followees.count},
             id: ('followings-current-user' if current_user && user.id==current_user.id) %></li>
+    <% if is_current_user?(user)%>
+      <li><%= link_to pluralize(user.favourite_articles.count, "favourite article"), favourite_articles_path, remote: true ,
+              data: {toggle: "modal", target: '#favourites_modal'} %></li>
+    <% end %>
   </ul>
 </div>
 
 <%= render 'users/followers_modal' %>
 <% if current_user && user.id == current_user.id %>
   <%= render 'users/followings_modal' %>
+  <%= render 'articles/favourites_modal' %>
 <% end %>

@@ -41,6 +41,10 @@ module ApplicationHelper
     current_user && current_user.is_admin?
   end
   
+  def is_current_user?(user)
+    current_user && current_user.id == user.id
+  end
+  
   def set_title(title)
     return if title.empty?
     content_for :title do 
