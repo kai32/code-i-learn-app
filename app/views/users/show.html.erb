@@ -1,15 +1,54 @@
 <% set_title "Profile of #{@user.full_name}" %>
 <% set_description @user.bio if @user.bio %>
-<% content_for :sidebar do %>
-  <%= render 'layouts/sidebar_profile', user: @user, show_on_mobile: true, show_bio: true %>
-<% end %>
+
 <div class="center">
   <%#= avatar_for @user %>
 </div>
-<h1 align="center">Welcome to <%= @user.full_name %>'s page</h1>
+<div class="jumbotron">
+  <div class="row">
+    <div class="col-md-4 center">
+      <%= avatar_for @user, size: "200x200" %>
+    </div>
+    <div class="col-md-8 center">
+      <h1><%= @user.full_name %></h1>
+      <ul class="listing">
+        <ul class="list-inline lead">
+          <li><%= link_to pluralize(@user.articles.count, 'article'), '#articles' %></li>
+          <li><%= link_to pluralize(@user.followers.count, "follower"), user_followers_path(@user), remote: true ,
+                  data: {toggle: "modal", target: '#followers_modal', count: @user.followers.count}, 
+                  id: "followers-#{@user.id}" %></li>
+          <li><%= link_to pluralize(@user.followees.count, 'following'), (is_current_user?(@user)) ? user_followings_path(@user) : '#', 
+                  remote: true ,data: {toggle: "modal", target: '#followings_modal', count: @user.followees.count},
+                  id: ('followings-current-user' if is_current_user?(@user)) %></li>
+        </ul>
+        <% if current_user %>
+          <li>
+            <%= link_to "Follow this user", user_follow_path(@user), 
+                      method: :post,
+                      remote: true,
+                      class: "btn btn-xs btn-primary btn-follow follow 
+                      #{'hide' if current_user.is_following?(@user) || is_current_user?(@user) }",
+                      data: {user_id: @user.id} %>
+            <%= link_to "Unfollow this user", user_unfollow_path(@user), 
+                      method: :delete,
+                      remote: true,
+                      class: "btn btn-xs btn-warning btn-follow unfollow
+                      #{'hide' if !current_user.is_following?(@user) || is_current_user?(@user)}",
+                      data: { user_id: @user.id}%>
+          </li>
+        <% end %>
+      </ul>
+      <p align="left" class="lead">
+          <%= @user.bio %>
+      </p>
+    </div>
+  </div>
+</div>
+
+<a name="articles"></a>
+<%= render 'articles/articles', obj: @articles %>  
 
 
-<%= render 'articles/articles', obj: @articles %>
 <% if @articles == nil || @articles.count == 0 %>
   <p class="lead">User has no articles</p>
 <% end %>
