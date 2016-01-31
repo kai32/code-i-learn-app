@@ -36,7 +36,7 @@
   </div>
   <div class="form-group">
     
-    <div class="row">
+    <div class="row no-margin">
       <%= f.label :categories, :class => 'control-label col-lg-2' %>
       <div class="col-lg-8">
         <%= f.collection_check_boxes :category_ids, Category.all, :id, :title do |cb| %>
@@ -47,8 +47,21 @@
   </div>
   <div class="form-group">
     <%= f.hidden_field :user_id, value: current_user.id %>
-    
+    <% if @article.draft_id %>
+      <%= f.hidden_field :draft_id, value: @article.draft_id %>
+    <% end %>
   </div>
+  <% if @article.new_record? %>
+    <div class="form-group">
+      <%= f.label :is_draft, "Save as draft?", :class => 'control-label col-lg-2' %>
+      <div class="col-lg-8">
+        <%= check_box_tag "is_draft" do |cb| %>
+          <% cb.label(class: "checkbox-inline input_checkbox") { cb.check_box(class: "checkbox") + "Save as draft?" } %>
+        <% end %>
+      </div>
+      
+    </div>
+  <% end %>
 
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">

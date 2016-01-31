@@ -16,6 +16,8 @@ Rails.application.routes.draw do
       # get 'recents', as: :recent
       patch 'toggle_feature'
       get 'favourites', to: 'users#favourite_articles', as: 'favourite'
+      get 'drafts', as: 'draft'
+      get '/draft/:id', to: 'articles#edit_draft', as: 'edit_draft'
     end
   end
   root 'home#index'

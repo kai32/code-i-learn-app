@@ -1,0 +1,30 @@
+<% obj.each do |draft| %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="well well-lg">
+        
+        <div class="article-title">
+          <%= link_to ("#{draft.title} "), edit_draft_articles_path(draft) %> 
+        </div>
+        
+        <div class="article-body no-padding">
+          <% if draft.description %>
+            <%= truncate(strip_tags(draft.description), length: 100) %>  
+          <% else %>
+            <%= truncate(strip_tags(draft.content), length: 100) %>  
+          <% end %>
+        <div class="article-meta-details">
+          <small>Created by: <%=draft.user.full_name if draft.user %>,
+              <%= time_ago_in_words(draft.created_at) %> ago,
+              last updated: <%= time_ago_in_words(draft.updated_at) %> ago
+          </small>
+        </div>
+          
+          
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
+<% end %>

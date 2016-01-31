@@ -32,6 +32,14 @@ class ArticlesController < ApplicationController
   # POST /articles.json
   def create
     @article = Article.new(article_params)
+    if params[:is_draft] == "1"
+      if @article.save_as_draft
+        flash[:success] = "Saved as draft"
+        redirect_to draft_articles_path and return
+      else
+        render 'new' and return
+      end
+    end
 
     respond_to do |format|
       if @article.save
@@ -88,6 +96,23 @@ class ArticlesController < ApplicationController
   def following
     @articles = Article.followed_by(current_user).paginate(page: params[:page], per_page: 5)
   end
+  
+  def drafts
+    @drafts = current_user.article_drafts
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+  
+  def edit_draft
+    draft = Article.find_draft(params[:id])
+    if draft.user_id != current_user.id
+      flash[:danger] = "Draft can only be edited by user who created them"
+      redirect_to root_path
+    end
+    @article= Article.from_draft(draft)
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -97,6 +122,6 @@ class ArticlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.require(:article).permit(:title, :content, :user_id, :description,:bootsy_image_gallery_id, category_ids: [])
+      params.require(:article).permit(:title, :content, :user_id, :description,:bootsy_image_gallery_id, :draft_id,category_ids: [])
     end
 end

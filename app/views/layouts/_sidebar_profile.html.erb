@@ -43,6 +43,7 @@
     <% if is_current_user?(user)%>
       <li><%= link_to pluralize(user.favourite_articles.count, "favourite article"), favourite_articles_path, remote: true ,
               data: {toggle: "modal", target: '#favourites_modal'} %></li>
+      <li><%= link_to pluralize(user.article_drafts.count, "Draft articles"), draft_articles_path %></li>
     <% end %>
   </ul>
 </div>

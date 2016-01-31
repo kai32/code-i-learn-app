@@ -1,0 +1,10 @@
+<% set_title 'Draft articles' %>
+<div class="page-header">
+  <h1>Draft articles</h1>
+</div>
+<%= render 'drafts', obj: @drafts %>
+
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_article_path,
+            :class => 'btn btn-primary' %>

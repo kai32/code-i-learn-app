@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   validates :bio, length: {maximum: 240 }
   
   has_many :articles, dependent: :destroy
+  has_many :article_drafts, dependent: :destroy, class_name: 'Article::Draft'
   has_many :comments, dependent: :destroy
   has_many :fellowships, dependent: :destroy
   has_many :followees, through: :fellowships, foreign_key: :followee_id
@@ -82,6 +83,7 @@ class User < ActiveRecord::Base
   def has_favourite?(article)
     favourites.where(article_id: article.id).any?
   end
+  
   
   private
   

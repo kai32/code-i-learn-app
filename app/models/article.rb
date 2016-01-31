@@ -1,4 +1,5 @@
 class Article < ActiveRecord::Base
+  attr_accessor :draft_id
   include Bootsy::Container
   belongs_to :user
   validates :title, presence: true, length: {minimum: 5, maxiumum: 30}
@@ -10,6 +11,27 @@ class Article < ActiveRecord::Base
   ratyrate_rateable 'quality'
   has_many :favourites, dependent: :destroy
   has_many :fans, source: :user, through: :favourites, foreign_key: :user_id
+  after_save :destroy_draft
+  
+  def save_as_draft
+    return false unless new_record?
+    if !draft_id
+      draft = Draft.new(title: title, content: content, user_id: user_id, description: description)
+      draft.save
+    else
+      draft = Draft.find(draft_id).update(title: title, content: content, user_id: user_id, description: description)
+    end
+    
+    # problem, doesnt assign current object with id of saved draft
+  end
+  
+  def self.from_draft(draft)
+    draft.create_article
+  end
+  
+  def self.find_draft(draft_id)
+    Draft.find(draft_id)
+  end
   
   def is_featured?
     is_featured
@@ -55,5 +77,19 @@ class Article < ActiveRecord::Base
     ( limit ? " LIMIT #{limit + 1}" : "")) - [self] # limit + 1 cus deducting self
   end
   
+  class Draft < ActiveRecord::Base
+    belongs_to :user
+    
+    def create_article 
+      article = Article.new(title: title, content: content, user_id: user_id, description: description, draft_id: id)
+    end
+  end
+  
+  
+  def destroy_draft
+    if draft_id
+      Draft.find(draft_id).destroy
+    end
+  end
   
 end
